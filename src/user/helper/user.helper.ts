@@ -14,20 +14,13 @@ export class UserHelper implements IUserHelper {
     @InjectModel(User.name) private userModel: Model<User>,
   ) {}
 
-  // create user
-  async createUser(dto: CreateUserDto): Promise<UserDto> {
-    // Ensure isDeleted is always false on sign up
-    const user = await this.userModel.create({ ...dto, isDeleted: false });
-    return plainToInstance(UserDto, user.toObject());
-  }
-
   // find multiple users with schema
   async findUser(
     dto: Partial<UserDto>,
   ): Promise<UserDto[]> {
     let users: User[] = await this.userModel.find(dto).exec();
     return users.map((item) => {
-      return plainToInstance(UserDto, item);
+      return plainToInstance(UserDto, item.toObject());
     });
   }
 
