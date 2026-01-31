@@ -26,6 +26,8 @@ const DEFAULT_CONFERENCE = {
   aboutScope: '',
   aboutFormat: '',
   aboutOrganizers: '',
+  submissionLink: 'https://easychair.org/conferences/?conf=icaici2026',
+  submissionLinkLabel: 'Easy Chair',
 };
 
 @Injectable()

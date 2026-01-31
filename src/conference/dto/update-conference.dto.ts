@@ -153,4 +153,14 @@ export class UpdateConferenceDto {
   @IsOptional()
   @IsString()
   aboutOrganizers?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  submissionLink?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  submissionLinkLabel?: string;
 }

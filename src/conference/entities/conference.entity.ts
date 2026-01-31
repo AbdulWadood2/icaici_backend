@@ -94,6 +94,12 @@ export class Conference extends Document {
 
   @Prop({ default: '' })
   aboutOrganizers: string;
+
+  @Prop({ default: 'https://easychair.org/conferences/?conf=icaici2026' })
+  submissionLink: string;
+
+  @Prop({ default: 'Easy Chair' })
+  submissionLinkLabel: string;
 }
 
 export const ConferenceSchema = SchemaFactory.createForClass(Conference);
