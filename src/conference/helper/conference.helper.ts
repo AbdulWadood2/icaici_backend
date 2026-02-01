@@ -28,6 +28,12 @@ const DEFAULT_CONFERENCE = {
   aboutOrganizers: '',
   submissionLink: 'https://easychair.org/conferences/?conf=icaici2026',
   submissionLinkLabel: 'Easy Chair',
+  siteTitle: 'ICAICI 2026',
+  favicon: '/favicon.ico',
+  submissionPortalStatus: 'open',
+  conferenceMode: 'hybrid',
+  pageContent: new Map(),
+  announcements: [],
 };
 
 @Injectable()

@@ -100,6 +100,44 @@ export class Conference extends Document {
 
   @Prop({ default: 'Easy Chair' })
   submissionLinkLabel: string;
+
+  // Browser tab and branding
+  @Prop({ default: 'ICAICI 2026' })
+  siteTitle: string;
+
+  @Prop({ default: '/favicon.ico' })
+  favicon: string;
+
+  // Submission portal: 'open' | 'closed'
+  @Prop({ default: 'open' })
+  submissionPortalStatus: string;
+
+  // Conference mode: 'hybrid' | 'online' | 'onsite'
+  @Prop({ default: 'hybrid' })
+  conferenceMode: string;
+
+  // Page content (key = page slug, value = HTML or markdown)
+  @Prop({ type: Map, of: String, default: () => new Map() })
+  pageContent: Map<string, string>;
+
+  // Announcements (title, content, optional date, active)
+  @Prop({
+    type: [
+      {
+        title: String,
+        content: String,
+        date: { type: Date, required: false },
+        active: { type: Boolean, default: true },
+      },
+    ],
+    default: [],
+  })
+  announcements: Array<{
+    title: string;
+    content: string;
+    date?: Date;
+    active?: boolean;
+  }>;
 }
 
 export const ConferenceSchema = SchemaFactory.createForClass(Conference);

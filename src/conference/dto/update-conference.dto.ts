@@ -163,4 +163,67 @@ export class UpdateConferenceDto {
   @IsOptional()
   @IsString()
   submissionLinkLabel?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  siteTitle?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  favicon?: string;
+
+  @ApiPropertyOptional({ enum: ['open', 'closed'] })
+  @IsOptional()
+  @IsString()
+  submissionPortalStatus?: string;
+
+  @ApiPropertyOptional({ enum: ['hybrid', 'online', 'onsite'] })
+  @IsOptional()
+  @IsString()
+  conferenceMode?: string;
+
+  @ApiPropertyOptional({ type: 'object', additionalProperties: { type: 'string' } })
+  @IsOptional()
+  pageContent?: Record<string, string>;
+
+  @ApiPropertyOptional({
+    type: 'array',
+    items: {
+      type: 'object',
+      properties: {
+        title: { type: 'string' },
+        content: { type: 'string' },
+        date: { type: 'string', format: 'date-time' },
+        active: { type: 'boolean' },
+      },
+    },
+  })
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => AnnouncementItemDto)
+  announcements?: AnnouncementItemDto[];
+}
+
+export class AnnouncementItemDto {
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  title?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  content?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsDateString()
+  date?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  active?: boolean;
 }
