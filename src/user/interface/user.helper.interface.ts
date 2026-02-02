@@ -5,6 +5,7 @@ import { User } from '../entities/user.entity';
 import { UserSchemaDto } from '../dto/user-schema.dto';
 
 export interface IUserHelper {
+  createUserWithSchema(dto: Partial<UserSchemaDto>): Promise<UserSchemaDto>;
   findUser(
     dto: Partial<UserDto>,
   ): Promise<UserDto[]>;

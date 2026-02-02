@@ -13,6 +13,12 @@ export class UserHelper implements IUserHelper {
   constructor(
     @InjectModel(User.name) private userModel: Model<User>,
   ) {}
+ 
+  async createUserWithSchema(dto: Partial<UserSchemaDto>): Promise<UserSchemaDto> {
+    const user = new this.userModel(dto);
+    await user.save();
+    return plainToInstance(UserSchemaDto, user.toObject());
+  }
 
   // find multiple users with schema
   async findUser(

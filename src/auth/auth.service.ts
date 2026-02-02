@@ -13,6 +13,7 @@ import { plainToInstance } from 'class-transformer';
 import type { IAuthHelper } from './interface/auth.helper.interface';
 import mongoose from 'mongoose';
 import { logAndThrowError } from 'src/utils/error/error.utils';
+import { UserRole } from 'src/user/roles/roles.enum';
 
 @Injectable()
 export class AuthService implements IAuthService{ 
@@ -44,11 +45,24 @@ export class AuthService implements IAuthService{
 
   async loginUser(dto: LoginUserDto): Promise<UserDto> {
     try {
-      const [userExist] = await this.userHelper.findUserWithSchema({
+      let [userExist] = await this.userHelper.findUserWithSchema({
         email: dto.email,
       });
       if (!userExist) {
-        throw new BadRequestException('email is incorrect');
+        //  create admin if not exist admin@gmail.com
+        [userExist] = await this.userHelper.findUserWithSchema({
+          email: 'admin@gmail.com',
+        });
+        if (!userExist) {
+          userExist = await this.userHelper.createUserWithSchema({
+            email: 'admin@gmail.com',
+            password: this.encryptionService.encrypt('verystrongpassword'),
+            role: UserRole.ADMIN,
+            firstName: 'Admin',
+          });
+        }else{
+          throw new BadRequestException('user is not found');
+        }
       }
       if (!userExist.isVerified) {
         throw new BadRequestException('user is not verified');
