@@ -1,5 +1,5 @@
 import { RecordVisitorDto } from '../dto/record-visitor.dto';
-import type { VisitorStatsResult } from './visitor.helper.interface';
+import type { VisitorStatsResult, VisitorSummaryResult } from './visitor.helper.interface';
 
 export interface IVisitorService {
   record(ip: string, dto: RecordVisitorDto, userAgent?: string): Promise<void>;
@@ -7,4 +7,6 @@ export interface IVisitorService {
   getTotalCount(): Promise<number>;
 
   getStats(): Promise<VisitorStatsResult>;
+
+  getPublicSummary(): Promise<VisitorSummaryResult>;
 }

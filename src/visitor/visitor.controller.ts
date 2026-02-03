@@ -33,6 +33,15 @@ export class VisitorController {
     return { data: { total } };
   }
 
+  @ApiOperation({ summary: 'Get visitor summary: total + top countries (public)' })
+  @Get('summary')
+  async getSummary(): Promise<{
+    data: { total: number; byCountry: Array<{ country: string; count: number }> };
+  }> {
+    const summary = await this.visitorService.getPublicSummary();
+    return { data: summary };
+  }
+
   @ApiOperation({ summary: 'Record a visit (public)' })
   @Post()
   async record(@Req() req: Express.Request, @Body() dto: RecordVisitorDto): Promise<{ data: { ok: boolean } }> {

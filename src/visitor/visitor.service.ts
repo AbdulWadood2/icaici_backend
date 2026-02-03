@@ -68,4 +68,13 @@ export class VisitorService implements IVisitorService {
       throw error;
     }
   }
+
+  async getPublicSummary() {
+    try {
+      return this.visitorHelper.getPublicSummary();
+    } catch (error) {
+      logAndThrowError(error, 'VisitorService.getPublicSummary');
+      throw error;
+    }
+  }
 }

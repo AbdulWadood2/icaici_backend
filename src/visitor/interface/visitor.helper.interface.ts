@@ -6,10 +6,17 @@ export interface VisitorStatsResult {
   byLocation: Array<{ country: string; city: string; count: number }>;
 }
 
+export interface VisitorSummaryResult {
+  total: number;
+  byCountry: Array<{ country: string; count: number }>;
+}
+
 export interface IVisitorHelper {
   create(ip: string, dto: RecordVisitorDto, userAgent?: string): Promise<void>;
 
   getTotalCount(): Promise<number>;
 
   getStats(): Promise<VisitorStatsResult>;
+
+  getPublicSummary(): Promise<VisitorSummaryResult>;
 }
