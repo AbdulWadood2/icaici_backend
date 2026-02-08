@@ -13,7 +13,7 @@ export class ImportantDateItem {
   @Prop()
   label: string;
 
-  @Prop()
+  @Prop({ default: 'TBA' })
   date: string;
 }
 
@@ -29,7 +29,7 @@ export class CommitteeMember {
   @Prop()
   role: string;
 
-  @Prop({ default: '' })
+  @Prop({ default: 'TBA' })
   name: string;
 }
 
@@ -50,7 +50,7 @@ export class Conference extends Document {
   @Prop({ default: 'Malaysia' })
   country: string;
 
-  @Prop({ default: '' })
+  @Prop({ default: 'TBA' })
   location: string;
 
   @Prop({ default: '' })
@@ -62,7 +62,7 @@ export class Conference extends Document {
   @Prop({ type: [Object], default: [] })
   fees: FeeItem[];
 
-  @Prop({ default: '' })
+  @Prop({ default: 'TBA' })
   venue: string;
 
   @Prop({ type: [Object], default: [] })
@@ -119,6 +119,48 @@ export class Conference extends Document {
   // Page content (key = page slug, value = HTML or markdown)
   @Prop({ type: Map, of: String, default: () => new Map() })
   pageContent: Map<string, string>;
+
+  // Venue section (when not using pageContent)
+  @Prop({ default: 'TBA' })
+  venueOnlinePlatformText: string;
+
+  @Prop({ default: 'TBA' })
+  venueHotelsText: string;
+
+  // Policy section (HTML; when empty, show TBA)
+  @Prop({ default: '' })
+  policyContent: string;
+
+  // Registration section (when not using pageContent)
+  @Prop({ default: '' })
+  registrationContent: string;
+
+  @Prop({ default: '' })
+  registrationWhatIsIncluded: string;
+
+  @Prop({ default: '' })
+  registrationHowToRegister: string;
+
+  // Submission section
+  @Prop({ default: '' })
+  submissionDescription: string;
+
+  // CFP section
+  @Prop({ default: '' })
+  cfpIntro: string;
+
+  @Prop({ default: '' })
+  cfpGuidelines: string;
+
+  // Home section (when not using pageContent)
+  @Prop({ default: '' })
+  homePublicationText: string;
+
+  @Prop({
+    type: [{ label: String, href: String }],
+    default: [],
+  })
+  homeQuickLinks: Array<{ label: string; href: string }>;
 
   // Announcements (title, content, optional date, active)
   @Prop({

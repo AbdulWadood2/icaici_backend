@@ -188,6 +188,64 @@ export class UpdateConferenceDto {
   @IsOptional()
   pageContent?: Record<string, string>;
 
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  venueOnlinePlatformText?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  venueHotelsText?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  policyContent?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  registrationContent?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  registrationWhatIsIncluded?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  registrationHowToRegister?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  submissionDescription?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  cfpIntro?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  cfpGuidelines?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  homePublicationText?: string;
+
+  @ApiPropertyOptional({
+    type: 'array',
+    items: { type: 'object', properties: { label: { type: 'string' }, href: { type: 'string' } } },
+  })
+  @IsOptional()
+  @IsArray()
+  homeQuickLinks?: Array<{ label: string; href: string }>;
+
   @ApiPropertyOptional({
     type: 'array',
     items: {
