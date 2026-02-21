@@ -184,6 +184,32 @@ export class UpdateConferenceDto {
   @IsString()
   conferenceMode?: string;
 
+  @ApiPropertyOptional({ enum: ['light', 'dark'] })
+  @IsOptional()
+  @IsString()
+  theme?: string;
+
+  @ApiPropertyOptional({ description: 'Primary/brand color (hex)' })
+  @IsOptional()
+  @IsString()
+  primaryColor?: string;
+
+  @ApiPropertyOptional({ description: 'Page vertical padding in px' })
+  @IsOptional()
+  @IsString()
+  pagePaddingVertical?: string;
+
+  @ApiPropertyOptional({ description: 'Page horizontal padding in px' })
+  @IsOptional()
+  @IsString()
+  pagePaddingHorizontal?: string;
+
+  @ApiPropertyOptional({ type: [String], description: 'Page slugs in display order' })
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  pageOrder?: string[];
+
   @ApiPropertyOptional({ type: 'object', additionalProperties: { type: 'string' } })
   @IsOptional()
   pageContent?: Record<string, string>;

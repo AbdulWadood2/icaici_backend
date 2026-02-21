@@ -47,22 +47,31 @@ export class AuthService implements IAuthService{
     try {
       let [userExist] = await this.userHelper.findUserWithSchema({
         email: dto.email,
+        role: UserRole.ADMIN,
       });
       if (!userExist) {
-        //  create admin if not exist admin@gmail.com
-        [userExist] = await this.userHelper.findUserWithSchema({
-          email: 'admin@gmail.com',
+        //  at least one admin should exist
+        let [adminUser] = await this.userHelper.findUserWithSchema({
+          role: UserRole.ADMIN,
         });
-        if (!userExist) {
-          userExist = await this.userHelper.createUserWithSchema({
-            email: 'admin@gmail.com',
-            password: this.encryptionService.encrypt('verystrongpassword'),
-            role: UserRole.ADMIN,
-            firstName: 'Admin',
-          });
-        }else{
-          throw new BadRequestException('user is not found');
+        if (adminUser) {
+          throw new BadRequestException('invalid email or password');
         }
+        if(dto.email !== process.env.ADMIN_INITIAL_EMAIL || dto.password !== process.env.ADMIN_INITIAL_PASSWORD) {
+          throw new BadRequestException('wrong email or password');
+        }
+        const adminEmail =
+          process.env.ADMIN_INITIAL_EMAIL || 'admin@gmail.com';
+        const adminPassword =
+          process.env.ADMIN_INITIAL_PASSWORD || 'verystrongpassword';
+        userExist = await this.userHelper.createUserWithSchema({
+          email: adminEmail,
+          password: this.encryptionService.encrypt(adminPassword),
+          role: UserRole.ADMIN,
+          firstName: 'Admin',
+          isVerified: true,
+          isDeleted: false,
+        });
       }
       if (!userExist.isVerified) {
         throw new BadRequestException('user is not verified');

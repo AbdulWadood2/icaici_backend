@@ -162,6 +162,24 @@ export class Conference extends Document {
   })
   homeQuickLinks: Array<{ label: string; href: string }>;
 
+  // Theme & color (admin configurable)
+  @Prop({ default: 'light' })
+  theme: string;
+
+  @Prop({ default: '#1e293b' })
+  primaryColor: string;
+
+  // Page padding (px values as string, e.g. "38" "16")
+  @Prop({ default: '38' })
+  pagePaddingVertical: string;
+
+  @Prop({ default: '16' })
+  pagePaddingHorizontal: string;
+
+  // Page order (slug array; determines nav + section order)
+  @Prop({ type: [String], default: [] })
+  pageOrder: string[];
+
   // Announcements (title, content, optional date, active)
   @Prop({
     type: [

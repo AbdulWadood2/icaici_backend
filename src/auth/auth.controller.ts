@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Inject,
+  Patch,
   Post,
   Req,
   UnauthorizedException,
@@ -13,6 +14,7 @@ import { UserDto } from 'src/user/dto/user.dto';
 import { ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
 import { UserRole } from 'src/user/roles/roles.enum';
 import { LogoutDto } from './dto/logout-user.dto';
+import { ChangePasswordDto } from './dto/change-password.dto';
 import { AuthGuard } from './guards/auth.guard';
 import { RolesGuard } from './guards/roles.guard';
 import { Roles } from './decorator/roles.decorator';
@@ -38,6 +40,23 @@ export class AuthController {
   async logout(@Body() logoutDto: LogoutDto): Promise<{ data: string }> {
     await this.authService.logout(logoutDto.refreshToken, logoutDto.fcmToken);
     return { data: 'logout successfully' };
+  }
+
+  @ApiOperation({ summary: 'Change password (admin only)' })
+  @ApiBearerAuth('JWT-auth')
+  @UseGuards(AuthGuard, RolesGuard)
+  @Roles(UserRole.ADMIN)
+  @Patch('change-password')
+  async changePassword(
+    @Req() req: { user: { userId: string } },
+    @Body() dto: ChangePasswordDto,
+  ): Promise<{ data: UserDto }> {
+    const response = await this.authService.changePassword(
+      req.user.userId,
+      dto.oldPassword,
+      dto.newPassword,
+    );
+    return { data: response };
   }
 
   @ApiOperation({ summary: 'Refresh the access token using the refresh token' })
