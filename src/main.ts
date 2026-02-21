@@ -1,5 +1,6 @@
 // src/main.ts
 import { NestFactory, Reflector } from '@nestjs/core';
+import { json, urlencoded } from 'express';
 import { AppModule } from './app.module';
 import { setupSwagger } from './swagger/swagger.config';
 import { TransformInterceptor } from './interceptors/transform.interceptor';
@@ -10,7 +11,9 @@ import {
 } from '@nestjs/common';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { bodyParser: false });
+  app.use(json({ limit: '10mb' }));
+  app.use(urlencoded({ extended: true, limit: '10mb' }));
   app.enableCors({
     origin: '*',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
