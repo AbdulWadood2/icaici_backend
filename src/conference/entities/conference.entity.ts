@@ -35,19 +35,19 @@ export class CommitteeMember {
 
 @Schema({ timestamps: true, _id: true })
 export class Conference extends Document {
-  @Prop({ default: 'committee@icaici.com' })
+  @Prop({ default: 'committee@example.com' })
   conferenceEmail: string;
 
-  @Prop({ default: 'International Conference on AI and Computing Innovation' })
+  @Prop({ default: 'International Conference' })
   fullName: string;
 
-  @Prop({ default: 'ICAICI 2026' })
+  @Prop({ default: 'Conference 2026' })
   shortName: string;
 
-  @Prop({ default: 'Kuala Lumpur' })
+  @Prop({ default: 'TBA' })
   city: string;
 
-  @Prop({ default: 'Malaysia' })
+  @Prop({ default: 'TBA' })
   country: string;
 
   @Prop({ default: 'TBA' })
@@ -80,10 +80,10 @@ export class Conference extends Document {
   @Prop({ default: '' })
   backgroundImage: string;
 
-  @Prop({ default: 'GMT +8 (Kuala Lumpur)' })
+  @Prop({ default: 'GMT' })
   timezone: string;
 
-  @Prop({ default: '2026-05-09T01:00:00.000Z' })
+  @Prop({ default: '' })
   countdownTargetDate: string;
 
   @Prop({ default: '' })
@@ -95,14 +95,14 @@ export class Conference extends Document {
   @Prop({ default: '' })
   aboutOrganizers: string;
 
-  @Prop({ default: 'https://easychair.org/conferences/?conf=icaici2026' })
+  @Prop({ default: '' })
   submissionLink: string;
 
-  @Prop({ default: 'Easy Chair' })
+  @Prop({ default: 'Submission Portal' })
   submissionLinkLabel: string;
 
   // Browser tab and branding
-  @Prop({ default: 'ICAICI 2026' })
+  @Prop({ default: 'Conference 2026' })
   siteTitle: string;
 
   @Prop({ default: '/favicon.ico' })

@@ -6,12 +6,9 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { Request } from 'express';
-import * as dotenv from 'dotenv';
 import type { IUserHelper } from 'src/user/interface/user.helper.interface';
 import type { IAuthHelper } from '../interface/auth.helper.interface';
 import mongoose from 'mongoose';
-
-dotenv.config();
 
 @Injectable()
 export class AuthGuard implements CanActivate {

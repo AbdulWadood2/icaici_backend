@@ -31,6 +31,10 @@ import { UserModule } from 'src/user/user.module';
       provide: 'IConferenceService',
       useClass: ConferenceService,
     },
+    {
+      provide: 'IConferenceHelper',
+      useClass: ConferenceHelper,
+    },
   ],
 })
 export class ConferenceModule {}
