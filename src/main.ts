@@ -1,9 +1,5 @@
-// When running in Docker, use container env vars only (set DOCKER_ENV=1).
-// Otherwise load .env for local development.
-if (!process.env.DOCKER_ENV) {
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  require('dotenv').config();
-}
+// src/main.ts
+import 'dotenv/config';
 import { NestFactory, Reflector } from '@nestjs/core';
 import { json, urlencoded } from 'express';
 import { AppModule } from './app.module';

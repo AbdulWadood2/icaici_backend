@@ -11,10 +11,7 @@ import { ReviewerModule } from './reviewers/reviewer.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      // In Docker, env vars are set by the container; .env is not used.
-      ignoreEnvFile: process.env.DOCKER_ENV === '1',
-    }),
+    ConfigModule.forRoot(),
     MongooseModule.forRoot(process.env.MONGO_URL! as string),
     UserModule,
     AuthModule,
