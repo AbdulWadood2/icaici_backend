@@ -45,6 +45,8 @@ const DEFAULT_CONFERENCE = {
     'venue',
     'policy',
     'registration',
+    'publications',
+    'quicklinks_announcements',
     'submission',
     'contact',
     'reviewers',
