@@ -64,6 +64,7 @@ const DEFAULT_CONFERENCE = {
   homePublicationText: '',
   homeQuickLinks: [],
   announcements: [],
+  htmlBoxStyles: {},
 };
 
 @Injectable()

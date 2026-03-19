@@ -180,6 +180,18 @@ export class Conference extends Document {
   @Prop({ type: [String], default: [] })
   pageOrder: string[];
 
+  /** Per-field box styles for RichTextEditor HTML areas (key e.g. policyContent, page:home, announcement:0) */
+  @Prop({ type: Object, default: () => ({}) })
+  htmlBoxStyles: Record<
+    string,
+    {
+      borderWidth?: number;
+      borderColor?: string;
+      borderRadius?: number;
+      boxShadowPreset?: string;
+    }
+  >;
+
   // Announcements (title, content, optional date, active)
   @Prop({
     type: [

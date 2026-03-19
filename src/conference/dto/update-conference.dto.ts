@@ -1,5 +1,5 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsOptional, IsArray, ValidateNested, IsDateString } from 'class-validator';
+import { IsString, IsOptional, IsArray, ValidateNested, IsDateString, IsObject } from 'class-validator';
 import { Type } from 'class-transformer';
 
 export class TrackItemDto {
@@ -213,6 +213,15 @@ export class UpdateConferenceDto {
   @ApiPropertyOptional({ type: 'object', additionalProperties: { type: 'string' } })
   @IsOptional()
   pageContent?: Record<string, string>;
+
+  @ApiPropertyOptional({
+    type: 'object',
+    additionalProperties: true,
+    description: 'RichTextEditor box styles per key (e.g. policyContent, page:home)',
+  })
+  @IsOptional()
+  @IsObject()
+  htmlBoxStyles?: Record<string, Record<string, unknown>>;
 
   @ApiPropertyOptional()
   @IsOptional()
